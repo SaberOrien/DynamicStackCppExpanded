@@ -17,8 +17,8 @@ Stack::~Stack()
 
 Stack::Stack(const Stack& s)
 {
-	size = s.size;
-	top = s.top;
+	this->size = s.size;
+	this->top = s.top;
 	if (size > 0) {
 		this->data = (int*)malloc(this->size * sizeof(int));
 		if (!(this->data)) {
