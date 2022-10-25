@@ -36,28 +36,28 @@ Stack::Stack(const Stack& s)
 	}
 }
 
+
 Stack& Stack::operator=(const Stack& s)
 {
 	if (this == &s) {
 		return *this;
 	}
-	if (this->top != s.top) {
-		free(data);
+	if (this->size < s.top) {
+		free(this->data);
 		this->size = s.size;
 		this->top = s.top;
+		this->data = NULL;
 		if (this->size > 0) {
-			this->data = (int*)malloc(this->size * sizeof(int));
+			this->data = (int*)realloc(this->data,this->size * sizeof(int));
 			if (!(this->data)) {
 				cout << "Unsuccessfull copy constructor operation. \nAborting"
 					 << endl;
 				abort();
 			}
 		}
-		else {
-			this->data = NULL;
-			abort();
-		}
 	}
+	this->size = s.size;
+	this->top = s.top;
 	for (size_t i = 0; i < size; i++) {
 		this->data[i] = s.data[i];
 	}
